@@ -1,0 +1,356 @@
+package 实训;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.*;
+import java.text.*;
+
+public class jisuanqi extends JFrame implements ActionListener {
+   static JTextField txt;//声明文本框对象 
+   static JFrame f;//声明窗口
+   static double yi,jieg,temp;//声明中间变量和结果变量
+   static int fh=5;//选择计算方式为双目运算
+   static String s;
+   public jisuanqi() {
+	   f=new JFrame("计算器");//创建一个标题名为“计算器”的窗口
+	   f.setSize(420,350);//设置窗口大小（宽，高）
+	   f.setLocation(300, 300);//设置窗口在屏幕出现的位置
+	   //计算器的创建
+	   JPanel p=new JPanel();//创建JPanel面板（中间容器）
+	   JPanel p1=new JPanel();
+	   JPanel p2=new JPanel();
+	   JPanel p3=new JPanel();
+	   JPanel p4=new JPanel();
+	   JPanel p5=new JPanel();
+	   JPanel p6=new JPanel();
+	   JPanel p7=new JPanel();
+	   txt=new JTextField(30);//创建文本框
+	   txt.setHorizontalAlignment(JTextField.RIGHT);//设置文本框的属性为右对齐
+	   JButton bt00=new JButton("sin");
+	   JButton bt=new JButton("cos");
+	   JButton bt1=new JButton("tan");
+	   JButton bt2=new JButton("log");
+	   JButton bt3=new JButton("len");
+	   
+	   JButton bt4=new JButton("二进制");
+	   JButton bt5=new JButton("Back");
+	   JButton bt6=new JButton("C");
+	   
+	   JButton bt7=new JButton("7");
+	   JButton bt8=new JButton("8");
+	   JButton bt9=new JButton("9");
+	   JButton bt10=new JButton("/");
+	   JButton bt11=new JButton("sqrt");
+	   
+	   JButton bt12=new JButton("4");
+	   JButton bt13=new JButton("5");
+	   JButton bt14=new JButton("6");
+	   JButton bt15=new JButton("*");
+	   JButton bt16=new JButton("Mod");
+	   
+	   JButton bt17=new JButton("1");
+	   JButton bt18=new JButton("2");
+	   JButton bt19=new JButton("3");
+	   JButton bt20=new JButton("-");
+	   JButton bt21=new JButton("1/x");
+	   
+	   JButton bt22=new JButton("0");
+	   JButton bt23=new JButton("+/-");
+	   JButton bt24=new JButton(".");
+	   JButton bt25=new JButton("+");
+	   JButton bt26=new JButton("=");
+	   
+	   bt00.addActionListener(this);//为各个按钮添加监视器
+	   bt.addActionListener(this);
+	   bt1.addActionListener(this);
+	   bt2.addActionListener(this);
+	   bt3.addActionListener(this);
+	   bt4.addActionListener(this);
+	   bt5.addActionListener(this);
+	   bt6.addActionListener(this);
+	   bt7.addActionListener(this);
+	   bt8.addActionListener(this);
+	   bt9.addActionListener(this);
+	   bt10.addActionListener(this);
+	   bt11.addActionListener(this);
+	   bt12.addActionListener(this);
+	   bt13.addActionListener(this);
+	   bt14.addActionListener(this);
+	   bt15.addActionListener(this);
+	   bt16.addActionListener(this);
+	   bt17.addActionListener(this);
+	   bt18.addActionListener(this);
+	   bt19.addActionListener(this);
+	   bt20.addActionListener(this);
+	   bt21.addActionListener(this);
+	   bt22.addActionListener(this);
+	   bt23.addActionListener(this);
+	   bt24.addActionListener(this);
+	   bt25.addActionListener(this);
+	   bt26.addActionListener(this);
+	  //计算器页面布局
+	   f.setLayout(new BorderLayout(12,2));//边界布局
+	   f.add(p,BorderLayout.NORTH);
+	   f.add(p1,BorderLayout.WEST);
+	   f.add(p2);
+	   p.add(txt);
+	   p.setLayout(new FlowLayout());
+	   p2.setLayout(new GridLayout(5,1,10,10));
+	   p2.add(p3);
+	   p2.add(p4);
+	   p2.add(p5);
+	   p2.add(p6);
+	   p2.add(p7);
+	   p3.setLayout(new GridLayout(1,3,10,10));
+	   p3.add(bt4);
+	   p3.add(bt5);
+	   p3.add(bt6);
+	   p4.setLayout(new GridLayout(1,5,10,10));
+	   p4.add(bt7);
+	   p4.add(bt8);
+	   p4.add(bt9);
+	   p4.add(bt10);
+	   p4.add(bt11);
+	   p5.setLayout(new GridLayout(1,5,10,10));
+	   p5.add(bt12);
+	   p5.add(bt13);
+	   p5.add(bt14);
+	   p5.add(bt15);
+	   p5.add(bt16);
+	   p6.setLayout(new GridLayout(1,5,10,10));
+	   p6.add(bt17);
+	   p6.add(bt18);
+	   p6.add(bt19);
+	   p6.add(bt20);
+	   p6.add(bt21);
+	   p7.setLayout(new GridLayout(1,5,10,10));
+	   p7.add(bt22);
+	   p7.add(bt23);
+	   p7.add(bt24);
+	   p7.add(bt25);
+	   p7.add(bt26);
+	   p1.setLayout(new GridLayout(5,1,10,10));
+	   p1.add(bt00);
+	   p1.add(bt);
+	   p1.add(bt1);
+	   p1.add(bt2);
+	   p1.add(bt3); 
+	   f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       f.setVisible(true);
+   }
+public void actionPerformed(ActionEvent arg0) {
+	if(arg0.getActionCommand().equals("1")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("1");
+		else
+			txt.setText(txt.getText()+"1");
+	}
+	if(arg0.getActionCommand().equals("2")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("2");
+		else
+			txt.setText(txt.getText()+"2");
+	}
+	if(arg0.getActionCommand().equals("3")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("3");
+		else
+			txt.setText(txt.getText()+"3");
+	}
+	if(arg0.getActionCommand().equals("4")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("4");
+		else
+			txt.setText(txt.getText()+"4");
+	}
+	if(arg0.getActionCommand().equals("5")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("5");
+		else
+			txt.setText(txt.getText()+"5");
+	}
+	if(arg0.getActionCommand().equals("6")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("6");
+		else
+			txt.setText(txt.getText()+"6");
+	}
+	if(arg0.getActionCommand().equals("7")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("7");
+		else
+			txt.setText(txt.getText()+"7");
+	}
+	if(arg0.getActionCommand().equals("8")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("8");
+		else
+			txt.setText(txt.getText()+"8");
+	}
+	if(arg0.getActionCommand().equals("9")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("9");
+		else
+			txt.setText(txt.getText()+"9");
+	}
+	if(arg0.getActionCommand().equals("0")) {
+		if(txt.getText().contentEquals("0"))
+			txt.setText("0");
+		else
+			txt.setText(txt.getText()+"0");
+	}
+	if(arg0.getActionCommand().equals(".")) {
+		if(txt.getText().indexOf(".")!=-1)
+			txt.setText(txt.getText());
+		else
+			txt.setText(txt.getText()+".");
+	}
+	if(arg0.getActionCommand().equals("sin")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie =Math.sin(yi/180*Math.PI);
+		txt.setText(String.valueOf(jie));
+		s="sin("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("cos")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie =Math.cos(yi/180*Math.PI);
+		txt.setText(String.valueOf(jie));
+		s="cos("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("tan")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie =Math.tan(yi/180*Math.PI);
+		txt.setText(String.valueOf(jie));
+		s="tan("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("log")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie =Math.log(yi)/Math.log(10.0);
+		txt.setText(String.valueOf(jie));
+		s="log("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("len")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie =Math.log(yi);
+		txt.setText(String.valueOf(jie));
+		s="len("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("+/-")) {
+		if (!(txt.getText().equals("0"))) {
+			yi=Double.valueOf(txt.getText());
+			yi=-yi;
+			txt.setText(String.valueOf(yi));
+		}
+	}
+	if(arg0.getActionCommand().equals("Back")) {
+		int i=txt.getText().length();
+		txt.setText(txt.getText().substring(0,i-1));
+	}
+	if(arg0.getActionCommand().equals("二进制")) {
+		yi=Double.valueOf(txt.getText());
+		long a=(long)(yi);
+		txt.setText(String.valueOf(Long.toBinaryString(a)));
+		s="二进制转化("+String.valueOf(yi)+")="+String.valueOf(Long.toBinaryString(a));
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("C")) {
+		txt.setText("");
+		yi=0;
+		fh=5;
+	}
+	if(arg0.getActionCommand().equals("/")) {//除法
+		yi=Double.valueOf(txt.getText());
+		fh=3;
+		txt.setText("");
+	}
+	if(arg0.getActionCommand().equals("*")) {//乘法
+		yi=Double.valueOf(txt.getText());
+		fh=2;
+		txt.setText("");
+	}
+	if(arg0.getActionCommand().equals("+")) {//加法
+		yi=Double.valueOf(txt.getText());
+		fh=0;
+		txt.setText("");
+	}
+	if(arg0.getActionCommand().equals("-")) {
+		yi=Double.valueOf(txt.getText());
+		fh=1;
+		txt.setText("");
+	}
+	if(arg0.getActionCommand().equals("Mod")) {
+		yi=Double.valueOf(txt.getText());
+		fh=4;
+		txt.setText("");
+	}
+	if(arg0.getActionCommand().equals("sqrt")) {
+		yi=Double.valueOf(txt.getText());
+		temp=yi;
+		double jie=Math.sqrt(yi);
+		txt.setText(String.valueOf(jie));
+		s="sqrt("+String.valueOf(temp)+")="+String.valueOf(jie);
+		txt.setText(s);
+		//s=null;
+	}
+	if(arg0.getActionCommand().equals("1/x")) {
+		double dou=Double.valueOf(txt.getText());
+		txt.setText("1"+"/"+dou+"="+String.valueOf(1.0/dou));
+	}
+	if(arg0.getActionCommand().equals("=")) {
+		double er=Double.valueOf(txt.getText());
+		switch(fh) {
+		case 0:
+			jieg=(yi+er);
+	s=String.valueOf(yi)+"+"+String.valueOf(er)+"="+String.valueOf(jieg);
+	txt.setText(s);
+	s=null;
+	break;
+		case 1:
+			jieg=(yi-er);
+	s=String.valueOf(yi)+"-"+String.valueOf(er)+"="+String.valueOf(jieg);
+	txt.setText(s);
+	s=null;
+	break;
+		case 2:
+			jieg=(yi*er);
+	s=String.valueOf(yi)+"*"+String.valueOf(er)+"="+String.valueOf(jieg);
+	txt.setText(s);
+	s=null;
+	break;
+		case 3:
+			jieg=(yi/er);
+	s=String.valueOf(yi)+"/"+String.valueOf(er)+"="+String.valueOf(jieg);
+	txt.setText(s);
+	s=null;
+	break;
+		case 4:
+			jieg=(yi%er);
+	s=String.valueOf(yi)+"%"+String.valueOf(er)+"="+String.valueOf(jieg);
+	txt.setText(s);
+	s=null;
+	break;
+		}
+		fh=5;
+		txt.setText(String.valueOf(jieg));
+	}
+}	   
+public static void main(String[] args){
+	new jisuanqi();
+}
+}
